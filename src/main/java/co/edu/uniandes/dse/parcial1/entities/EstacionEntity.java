@@ -16,6 +16,6 @@ public class EstacionEntity extends BaseEntity {
     private Integer capacidad;
 
      @PodamExclude
-    @ManyToMany(mappedBy = "ruta")
-    private Collection<RutaEntity> series = new ArrayList<>();
+    @ManyToMany(mappedBy = "estaciones")
+    private Collection<RutaEntity> rutas = new ArrayList<>();
 }

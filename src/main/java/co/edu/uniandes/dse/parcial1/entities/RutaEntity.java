@@ -19,6 +19,6 @@ public class RutaEntity extends BaseEntity {
 
     @PodamExclude
     @ManyToMany
-    private Collection<EstacionEntity> estacion = new ArrayList<>();
+    private Collection<EstacionEntity> estaciones = new ArrayList<>();
 
 }
