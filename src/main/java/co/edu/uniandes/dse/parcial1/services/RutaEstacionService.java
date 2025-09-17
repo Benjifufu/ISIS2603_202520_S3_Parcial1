@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class EstacionRutaService {
+public class RutaEstacionService {
 
     @Autowired
     private EstacionRepository estacionRepository;
@@ -62,5 +62,25 @@ public class EstacionRutaService {
 		    rutaEntity.get().getEstaciones().remove(rutaEntity.get());
 
     }
+
+
+	@Transactional
+	public EstacionEntity getEstacion(Long rutaId, Long estacionId) throws EntityNotFoundException, IllegalOperationException {
+		
+		Optional<EstacionEntity> estacionEntity = estacionRepository.findById(estacionId);
+		Optional<RutaEntity> rutaEntity = rutaRepository.findById(rutaId);
+
+		if (estacionEntity.isEmpty()) {
+			throw new EntityNotFoundException("Estacion no encontrada");
+		}
+		if (rutaEntity.isEmpty()) { 
+			throw new EntityNotFoundException("Ruta no encontrada");
+		}
+
+		if (!rutaEntity.get().getEstaciones().contains(rutaEntity.get())) {
+			throw new IllegalOperationException("El evento no esta asociada a un miembro de equipo");
+		}
+		return estacionEntity.get();
+	}
 }
     
